@@ -11,4 +11,6 @@ assert logger.load()[test_link] == 1
 temp = logger.load()
 logger.save(logger.load())
 assert logger.load() == temp #sanity check
+logger.loglink(test_link.upper())
+assert logger.load()[test_link] == 1 #check capitalization
 logger.clear() #clean up
