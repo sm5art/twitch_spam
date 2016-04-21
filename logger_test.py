@@ -11,3 +11,4 @@ assert logger.load()[test_link] == 1
 temp = logger.load()
 logger.save(logger.load())
 assert logger.load() == temp #sanity check
+logger.clear() #clean up
