@@ -14,7 +14,7 @@ def init_emotes():
 		url = "https://twitchemotes.com/api_cache/v2/global.json"
 		wow=json.loads(requests.get(url).content)["emotes"]
 		for key, value  in wow.iteritems():
-				wowzer.append(key)
+				wowzer.append(key.encode('ascii', 'ignore'))
 
 		emotes = wowzer
 

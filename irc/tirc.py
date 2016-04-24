@@ -5,6 +5,7 @@ import re
 from random import randint
 import requests
 import emotes
+import datetime
 
 class TChannel(threading.Thread):
 	def __init__(self, channel = "",length=50):
@@ -17,7 +18,6 @@ class TChannel(threading.Thread):
 		self.channel = channel
 		emotes.init_emotes()
 		self.start()
-		self.join()
 
 	def run(self):
 		s=socket.socket( )
@@ -41,14 +41,16 @@ class TChannel(threading.Thread):
 		   #message = message[1:message.index("!")] + message[message.index("#"):]
 		for x in emotes.emotes:
 			if x in message:
-				print x
-				self.buffer.push(x)
+				element = {"channel":self.channel,"message":x}
+				print element
+				self.buffer.push(element)
 				break
 		
 		link_factory = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", message)
 		if len(link_factory)>0:
-				print link_factory[0]
-				self.buffer.push(link_factory[0])
+				element = {"channel":self.channel,"message":link_factory[0]}
+				self.buffer.push(element)
+				print element
 
 
 

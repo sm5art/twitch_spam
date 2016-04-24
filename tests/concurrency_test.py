@@ -10,8 +10,9 @@ import json
 twitch = requests.get("https://api.twitch.tv/kraken/streams")
 channel = json.loads(twitch.content)
 
-for i in range(0,50):
+for i in range(0,3):
 	TChannel(channel = channel["streams"][i]["channel"]["name"])
+print "wow"
 
 
 
