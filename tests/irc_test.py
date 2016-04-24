@@ -10,4 +10,4 @@ twitch = session.get("https://api.twitch.tv/kraken/streams")
 channel = json.loads(twitch.content)
 name =  channel["streams"][0]["channel"]["name"]
 
-channel = TChannel(channel = name)
+channel = TChannel(channel = "arturbabeav")
