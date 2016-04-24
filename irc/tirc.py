@@ -40,10 +40,10 @@ class MessageBuffer():
 
 	def push(self,message):
 		if len(self.buffer_content) >= self.size:
-			self.buffer.remove(0)
+			self.buffer_content.remove(0)
 			self.buffer_content.append(message)
 		else:
 			self.buffer_content.append(message)
 
 	def __str__(self):
-		return self.buffer[len(self.buffer)-1]
+		return self.buffer_content[len(self.buffer)-1]
