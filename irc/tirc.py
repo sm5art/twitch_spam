@@ -27,6 +27,8 @@ class TChannel():
 
 	def on_message(self,message):
 		self.buffer.push(message)
+		if "#" in message or "@" in message:
+		    message = message[1:message.index("@")] + message[message.index("#"):]
 		print message
 
 
