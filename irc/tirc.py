@@ -3,6 +3,21 @@ import threading
 import json
 import re
 from random import randint
+import requests
+import emotes
+
+
+
+
+url = "https://twitchemotes.com/api_cache/v2/global.json"
+def init_emotes():
+	emotes=[]
+	emotes=json.loads(requests.get(url).content)["emotes"]
+	for key,value in emotes:
+		emotes.append(key)
+	return emotes
+
+
 
 
 class TChannel(threading.Thread):
@@ -37,10 +52,14 @@ class TChannel(threading.Thread):
 		
 		#if "#" in message and "!" in message:
 		   #message = message[1:message.index("!")] + message[message.index("#"):]
-		message = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", message)
-		if len(message)>0:
-				print message[0]
-				self.buffer.push(message[0])
+		if any(x in message for x in emotes.emotes):
+				print x
+				self.buffer.push(x) 
+		
+		link_factory = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", message)
+		if len(link_factory)>0:
+				print link_factory[0]
+				self.buffer.push(link_factory[0])
 
 
 
