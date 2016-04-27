@@ -8,6 +8,6 @@ import json
 session = requests.Session()
 twitch = session.get("https://api.twitch.tv/kraken/streams")
 channel = json.loads(twitch.content)
-name =  channel["streams"][0]["channel"]["name"]
+name =  channel["streams"][1]["channel"]["name"]
 
 channel = TChannel(channel = "arturbabeav")

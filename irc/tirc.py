@@ -8,15 +8,15 @@ import emotes
 import datetime
 
 class TChannel(threading.Thread):
-	def __init__(self, channel = "",length=50):
+	def __init__(self, callback,channel = [],length=50):
 		super(TChannel, self).__init__()
 		self.host = "irc.chat.twitch.tv"
 		self.port = 6667
 		self.buffer = MessageBuffer(length)
 		self.nick = "justinfan"+"".join("%s" % randint(0,9) for i in range(0,10))
 		self.PASS = "doesnotmatter"
-		self.channel = channel
-		emotes.init_emotes()
+		self.channel = channel[:20]
+		self.callback = callback
 		self.start()
 
 	def run(self):
@@ -27,7 +27,8 @@ class TChannel(threading.Thread):
 		self.join_channel(s)
 
 	def join_channel(self,s):
-		s.send("JOIN #%s\r\n" % self.channel)
+		for i in self.channel:
+			s.send("JOIN #%s\r\n" %i)
 		self.populate_buffer(s)
 
 	def populate_buffer(self,s):
@@ -36,21 +37,10 @@ class TChannel(threading.Thread):
 			self.on_message(message)
 
 	def on_message(self,message):
+		self.callback(self,message)
 		
-		#if "#" in message and "!" in message:
-		   #message = message[1:message.index("!")] + message[message.index("#"):]
-		for x in emotes.emotes:
-			if x in message:
-				element = {"channel":self.channel,"message":x}
-				print element
-				self.buffer.push(element)
-				break
-		
-		link_factory = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", message)
-		if len(link_factory)>0:
-				element = {"channel":self.channel,"message":link_factory[0]}
-				self.buffer.push(element)
-				print element
+	
+				
 
 
 

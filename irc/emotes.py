@@ -1,20 +1,4 @@
-import json
-import requests
-
-initiated = False
-emotes = []
+emotes = ['NotATK', 'HassaanChop', 'PogChamp', 'StinkyCheese', 'TBTacoLeft', 'DendiFace', 'BORT', 'BuddhaBar', 'JKanStyle', 'BlargNaut', 'RaccAttack', 'PuppeyFace', 'ArsonNoSexy', 'FrankerZ', 'PeteZaroll', 'TinyFace', 'ShazBotstix', 'EagleEye', 'PermaSmug', 'BCWarrior', 'SMSkull', 'TheRinger', 'Kreygasm', 'PJSalt', 'OSkomodo', 'SoonerLater', 'StrawBeary', 'PanicVis', 'Kappa', 'DogFace', 'TBTacoRight', 'Poooound', 'MrDestructoid', 'WTRuck', 'KappaPride', 'bleedPurple', 'OpieOP', 'SoBayed', 'UnSane', 'twitchRaid', 'KevinTurtle', 'NoNoSpot', 'UleetBackup', 'PipeHype', 'duDudu', 'ShibeZ', 'DAESuppy', 'Mau5', 'panicBasket', 'FailFish', 'TF2John', 'MVGame', 'AthenaPMS', 'DOOMGuy', 'BionicBunion', 'HassanChop', 'FuzzyOtterOO', 'riPepperonis', 'CougarHunt', 'KappaClaus', 'HeyGuys', 'ResidentSleeper', 'AsianGlow', 'GrammarKing', 'TheThing', 'BloodTrail', 'ChefFrank', 'CoolCat', 'PunchTrees', 'NotLikeThis', 'DansGame', 'SSSsss', 'NomNom', 'PazPazowitz', 'HumbleLife', 'OSfrog', 'BabyRage', 'SriHead', 'ArgieB8', 'ANELE', 'VaultBoy', 'FreakinStinkin', 'SMOrc', 'WholeWheat', 'RalpherZ', 'SuperVinlin', 'HotPokket', 'TTours', 'VoHiYo', 'UncleNox', 'WinWaker', 'StoneLightning', 'PartyTime', 'PRChase', 'OMGScoots', 'BCouch', 'BrokeBack', 'DBstyle', 'JonCarnage', 'YouWHY', 'BrainSlug', 'KAPOW', 'BatChest', 'MikeHogu', 'BibleThump', 'KappaRoss', '4Head', 'GingerPower', 'Volcania', 'EleGiggle', 'deIlluminati', 'KappaWealth', 'SmoocherZ', 'ShadyLulu', 'mcaT', 'OneHand', 'TheTarFu', 'PraiseIt', 'Jebaited', 'DatSheffy', 'cmonBruh', 'NinjaTroll', 'PicoMause', 'CorgiDerp', 'TriHard', 'ItsBoshyTime', 'MingLee', 'BigBrother', 'TBCheesePull', 'PeoplesChamp', 'RedCoat', 'SeemsGood', 'TooSpicy', 'OptimizePrime', 'deExcite', 'RitzMitz', 'SwiftRage', 'Keepo', 'FUNgineer', 'OSsloth', 'RuleFive', 'WutFace', 'FunRun', 'FPSMarksman','OhMyDog', 'PeteZarollTie', 'PMSTwin', 'Kippa', 'ThunBeast']
 
 
-def init_emotes():
-	global initiated
-	global emotes
-	if not initiated:
-		initiated = True
-		wowzer=[]
-		url = "https://twitchemotes.com/api_cache/v2/global.json"
-		wow=json.loads(requests.get(url).content)["emotes"]
-		for key, value  in wow.iteritems():
-				wowzer.append(key.encode('ascii', 'ignore'))
-
-		emotes = wowzer
 
