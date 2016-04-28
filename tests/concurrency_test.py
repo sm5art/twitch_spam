@@ -6,6 +6,7 @@ import requests
 import re
 import irc.emotes
 import json
+import mongo.mongo as mongo
 
 
 def on_message(self,message):
@@ -18,6 +19,7 @@ def on_message(self,message):
 	for x in irc.emotes.emotes:
 		if x in message:
 			element = {"channel":channel,"message":x}
+			mongo.log_emote(channel,x)
 			print element
 			self.buffer.push(element)
 			break
@@ -25,6 +27,7 @@ def on_message(self,message):
 	link_factory = re.findall("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", message)
 	if len(link_factory)>0:
 			element = {"channel":channel,"message":link_factory[0]}
+			mongo.log_link(channel,link_factory[0])
 			self.buffer.push(element)
 			print element
 
@@ -33,9 +36,7 @@ channel = json.loads(twitch.content)
 
  
 TChannel(on_message,channel = [channel["streams"][i]["channel"]["name"] for i in range(0,20)])
-TChannel(on_message,channel = [channel["streams"][i]["channel"]["name"] for i in range(20,40)])
-TChannel(on_message,channel = [channel["streams"][i]["channel"]["name"] for i in range(40,60)])
-TChannel(on_message,channel = [channel["streams"][i]["channel"]["name"] for i in range(60,80)])
+
 
 
 
