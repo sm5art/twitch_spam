@@ -7,6 +7,7 @@ import requests
 import emotes
 import datetime
 
+
 class TChannel(threading.Thread):
 	def __init__(self, callback,channel = [],length=50):
 		super(TChannel, self).__init__()
@@ -32,7 +33,7 @@ class TChannel(threading.Thread):
 		self.populate_buffer(s)
 
 	def populate_buffer(self,s):
-		while 1:
+		while True:
 			message = s.recv(1024)
 			self.on_message(message)
 
@@ -40,9 +41,6 @@ class TChannel(threading.Thread):
 		self.callback(self,message)
 		
 	
-				
-
-
 
 class MessageBuffer():
 	def __init__(self,size):
